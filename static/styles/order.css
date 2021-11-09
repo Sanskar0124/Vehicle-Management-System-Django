@@ -1,0 +1,25 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+.ordbtn{
+    display: flex;
+    margin: 1em 1em;
+}
+
+.check{
+    display: flex;
+}
+
+.left{
+    margin-right: 1vw;
+}
+
+.acc{
+    width: 99em
+}
+
+.width{
+    width: 100em;
+}

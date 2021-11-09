@@ -1,0 +1,17 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+.sideBar{
+    min-height: 100vh;
+}
+
+.mainContainer{
+    display: flex;
+    /* background-color: red; */
+}
+
+.content{
+    margin: 15px 0px 0px 15px;
+}
