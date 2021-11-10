@@ -14,4 +14,36 @@
 
 <script src="{% static 'admin-lte/dist/js/adminlte.min.js' %}"></script>
 <script src="{% static 'admin-lte/dist/js/demo.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script> 
+
+    // DashBoard Cards
+    $("document").ready(()=>{
+        title = String(document.title);
+        if (title.includes("Site administration | Django site admin")) {
+        $.ajax({
+            url:"/dashboard/master",
+            type:"GET"
+        }).done((json)=>{
+            document.getElementById("ActiveTravels").innerHTML = json.data.active_travels
+            document.getElementById("ActiveVehicles").innerHTML = json.data.active_vehicles
+            document.getElementById("ActiveDrivers").innerHTML = json.data.active_drivers
+            document.getElementById("VehicleIns").innerHTML = json.data.insurance_exp
+            document.getElementById("VehiclePuc").innerHTML = json.data.puc_exp
+            document.getElementById("VehicleService").innerHTML = json.data.need_servicing
+            document.getElementById("LicenseExp").innerHTML = json.data.license_exp
+        })
+        }
+    })
+
+    $("document").ready(function () {
+    title = String(document.title);
+    console.log(title);
+    if (title.includes("Change vehicle | Django site admin")) {
+        {% comment %} $(".card-body").addClass("d-flex justify-content-between") {% endcomment %}
+    }
+    })
+
+
+</script>
 {% endblock %}
