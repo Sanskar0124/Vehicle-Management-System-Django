@@ -38,9 +38,13 @@
 
     $("document").ready(function () {
     title = String(document.title);
-    console.log(title);
-    if (title.includes("Change vehicle | Django site admin")) {
-        {% comment %} $(".card-body").addClass("d-flex justify-content-between") {% endcomment %}
+    // console.log(title);
+    firstName = document.getElementById("id_first_name").value
+    
+    if (title.includes("Change driver | Django site admin")) {
+        if(firstName == "" || firstName > 8){
+            alert("Please enter valid first")
+        }                                                                                                                
     }
     })
 

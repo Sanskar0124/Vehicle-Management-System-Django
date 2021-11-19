@@ -29,6 +29,8 @@ def master_dashboard(request):
 
     # Vehicle Maintainance
     vehicleMaintainance = VehicleMaintainance.objects.all()
+
+    # Insurance Expiry
     for i in vehicleMaintainance:
         # Insurance Expiry
         insDate = i.insurance_exp
