@@ -3,6 +3,7 @@ from django.utils.html import format_html
 from datetime import date
 from .choices import DRIVING_TIME, DRIVER_STATUS, DRIVER_EXPERIENCE
 from .validations import license, adharCard, name, panCard, phoneNumber, zipCode
+from django.utils.html import mark_safe
 import datetime 
 
 current_date = date.today()
@@ -28,7 +29,6 @@ class DriverDoc(Base):
     license_img = models.ImageField(upload_to="driversDocs/images", default="")
     license_no = models.CharField(max_length=15, validators=[license])
     license_exp_date = models.DateField()
-    license_status = models.CharField(max_length=15, default="")
     adharCard_img = models.ImageField(upload_to="driversDocs/images", default="")
     adharCard_no = models.CharField(max_length=15, validators=[adharCard])
     panCard_img = models.ImageField(upload_to="driversDocs/images", default="")
@@ -41,6 +41,12 @@ class DriverDoc(Base):
         datRem = self.license_exp_date - current_date
         strDate = str(datRem).split()
         intDate = int(strDate[0])
+        if(intDate < 0):
+            return format_html(
+                '<span style="color: {};">{}</span>',
+                "red",
+                "Need to reneve",
+                )
         if(intDate < 30):
             return format_html(
                 '<span style="color: {};">{}</span>',
@@ -53,11 +59,32 @@ class DriverDoc(Base):
                 "orange",
                 str(intDate) + " Days remaining",
                 )
-        
-    @property
-    def driver_name(self):
-        name = Driver.first_name
-        return name
+    
+    def license_status(self):
+        datRem = self.license_exp_date - current_date
+        strDate = str(datRem).split()
+        intDate = int(strDate[0])
+        if(intDate < 0):
+            return format_html(
+                '<span style="color: {};">{}</span>',
+                "red",
+                "InActive",
+                )
+        else:
+            return format_html(
+                '<span style="color: {};">{}</span>',
+                "green",
+                "Active",
+                )
+
+    @property            
+    def drivers_image(self):
+        return mark_safe('<img src="{}" width="160" height="130" />'.format(self.driver_image.url))
+
+    # @property
+    # def driver_name(self):
+    #     name = Driver.first_name
+    #     return name
 
     def __str__(self):
         return self.license_no

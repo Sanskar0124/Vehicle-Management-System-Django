@@ -33,15 +33,17 @@ def name(value):
         )
 
 def phoneNumber(value):
-    if len(value) == 0 or len(value) > 12 or len(value) < 10:
+    number = str(value)
+    if len(number) == 0 or len(number) > 12 or len(number) < 10:
         raise ValidationError(
             _('%(value)s is not a valid number, Please eneter your valid contact number.'),
-            params={'value': value},
+            params={'value': number},
         )
 
 def zipCode(value):
-    if len(value) == 0 or len(value) > 6 or len(value) < 6:
+    number = str(value)
+    if len(number) == 0 or len(number) > 6 or len(number) < 6:
         raise ValidationError(
             _('%(value)s is not a valid ZipCode, Please eneter a valid ZipCode.'),
-            params={'value': value},
+            params={'value': number},
         )
